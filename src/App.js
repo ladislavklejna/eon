@@ -1,23 +1,176 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Table, Progress } from "reactstrap";
+import { useEffect, useState } from "react";
+import data from "./data";
+import dataWeekend from "./dataWeekend";
+import Weather from "./Weather";
 
 function App() {
+  const [aktual, setAktual] = useState();
+  const [zero, setZero] = useState(null);
+  const [red, setRed] = useState(false);
+  const [message, setMessage] = useState("");
+  const [zajakdlouho, setZajakdlouho] = useState();
+  const [dataPlan, setDataPlan] = useState([]);
+  let cas = Date.now();
+  let date = new Date(cas);
+  let den = date.getDay();
+  let hodina = date.getHours();
+  let minuta = date.getMinutes();
+
+  const refresh = () => {
+    let progress = hodina * 60 + minuta - 360;
+    setAktual(progress);
+
+    // zjisti den a nastavi plan na tyden nebo vikend
+    if (den === 6 || den === 0) {
+      setDataPlan(dataWeekend);
+    } else {
+      setDataPlan(data);
+    }
+    //kdyz je minuta jednociferna prida pred cislo nulu
+    if (minuta >= 0 && minuta < 10) {
+      setZero("0");
+    } else {
+      setZero(null);
+    }
+    // vypocita casy NT a VT
+    let summary = 0;
+    let pole = [];
+    dataPlan.forEach((eleme) => {
+      if (eleme.value === "ano") {
+        summary += 60;
+      } else {
+        pole.push(summary);
+        summary += 60;
+        pole.push(summary);
+      }
+    });
+
+    // jak dlouho jeste bude topit?
+    let min = 1080;
+    for (let i = 0; i < pole.length; i += 2) {
+      if (progress <= pole[i]) {
+        let vysledek = pole[i] - progress;
+        if (vysledek < min) {
+          min = vysledek;
+        }
+      }
+    }
+
+    // za jak dlouho zacne?
+    let x = 0;
+    for (let i = 0; i < pole.length; i += 2) {
+      if (progress > pole[i] && progress < pole[i + 1]) {
+        let vysledek = pole[i + 1] - progress;
+        x = vysledek;
+      }
+    }
+    // cisla pro za jak dlouho zacne topit
+    if (x === 0) {
+      min = Math.floor(min / 60) + "h : " + (min % 60) + "min";
+      setZajakdlouho(min);
+    } else {
+      x = Math.floor(x / 60) + "h : " + (x % 60) + "min";
+      setZajakdlouho(x);
+    }
+
+    if (progress > pole[7]) {
+      setMessage("Bude topit po zbytek dne");
+    } else {
+      setMessage("");
+    }
+    if (
+      (progress > pole[0] && progress < pole[1]) ||
+      (progress > pole[2] && progress < pole[3]) ||
+      (progress > pole[4] && progress < pole[5]) ||
+      (progress > pole[6] && progress < pole[7])
+    ) {
+      setRed(true);
+    } else {
+      setRed(false);
+    }
+  };
+
+  useEffect(() => {
+    refresh();
+    let inter = setInterval(refresh, 20000);
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container className="cont">
+        <div id="one">
+          <div className="rotate">
+            <Progress
+              style={{ zIndex: -2 }}
+              striped
+              animated
+              color="info"
+              value={aktual}
+              max={1080}
+            ></Progress>
+            <Progress
+              multi
+              style={{
+                zIndex: 2,
+                height: "60px",
+              }}
+            >
+              {dataPlan.map((x) => (
+                <Progress
+                  key={x.id}
+                  bar
+                  className={`bor ${x.value === "ano" ? "success" : "danger"}`}
+                  value="60"
+                  max={1080}
+                ></Progress>
+              ))}
+            </Progress>
+            <Table className="tab">
+              <tr>
+                {data.map((x) => (
+                  <td key={x.id}>{x.id}</td>
+                ))}
+              </tr>
+            </Table>
+          </div>
+        </div>
+        <div id="two">
+          <h2 className="text-center">1.únor - 1.duben 2024</h2>
+          <div className="topi">
+            <h2 className={`text-center ${red ? "red" : "green"} `}>
+              {hodina}:{zero + minuta}
+            </h2>
+            {message === "" ? (
+              <div>
+                <h2
+                  className={`text-center txt-bold ${red ? "red" : "green"} `}
+                >
+                  {!red ? "Topí" : "Netopí"}
+                </h2>
+                <h4
+                  className={`text-center txt-bold ${red ? "red" : "green"} `}
+                >
+                  {red ? "Začne topit za " : "Bude topit ještě "}
+                </h4>
+                <h4
+                  className={`text-center txt-bold hodmin ${
+                    red ? "red" : "green"
+                  }`}
+                >
+                  {zajakdlouho}
+                </h4>
+              </div>
+            ) : (
+              <h5 className={`text-center ${red ? "red" : "green"} `}>
+                {!red ? "Bude topit po zbytek dne" : "Netopí"}
+              </h5>
+            )}
+            <Weather min={minuta} hod={hodina} />
+          </div>
+        </div>
+      </Container>
     </div>
   );
 }

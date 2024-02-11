@@ -1,38 +1,94 @@
 .App {
-  text-align: center;
+  --green: #4ebf4b;
+  --red: #a62317;
+  --back: #456173;
+  /* border: 1px dashed blue; */
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: var(--back);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.txt-bold {
+  font-weight: 900;
+  text-shadow: 1px 1px 1px black;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cont {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+#one {
+  position: relative;
+  height: 100vh;
+  width: 30%;
+}
+#two {
+  height: 100vh;
+  width: 70%;
+  margin-top: 20px;
+}
+.topi > h2 {
+  margin-top: 5px;
+  font-size: 60px;
+  font-weight: 800;
+  text-shadow: 1px 1px 1px black;
 }
 
-.App-link {
-  color: #61dafb;
+.tab {
+  transform: translateX(-18px) translateY(-43px);
+  font-weight: 600;
+}
+.rotate {
+  display: flexbox;
+  position: absolute;
+  top: 35%;
+  left: -25%;
+  width: 90vh;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(90deg) translateX(-53%) translateY(-10%);
+  transform-origin: bottom left;
+}
+.rotate > Table > tr > td {
+  transform: rotate(-90deg);
+  text-align: center;
+  width: 5.55vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text-align-left {
+  text-align: left;
 }
+.text-align-right {
+  text-align: right;
+}
+
+.success {
+  background-color: var(--green) !important;
+}
+.danger {
+  background-color: var(--red) !important;
+}
+.green {
+  color: var(--green);
+}
+.red {
+  color: var(--red);
+}
+.black {
+  color: black;
+}
+
+.bor {
+  border-left: 1px solid black;
+}
+.bor::after {
+  content: "";
+  position: absolute;
+  width: 1.5px;
+  height: 20px;
+  transform: translateX(-1px);
+  background-color: var(--green);
+}
+.hodmin {
+  border-bottom: 3px solid black;
+}
+
+/* .shadow {
+  text-shadow: 1px 1px 3px white;
+} */

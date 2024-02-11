@@ -1,0 +1,26 @@
+.one-card {
+  background-color: var(--back);
+  /* box-shadow: 1px 1px 10px 3px inset white; */
+  width: 85px;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 3px;
+}
+.one-card p {
+  /* text-align: left; */
+  margin-bottom: 0;
+  color: rgb(255, 255, 255);
+}
+
+.mg {
+  align-content: center;
+  justify-content: center;
+}
+.mg hr {
+  margin: 3px;
+  color: rgb(255, 255, 255);
+}
+.white {
+  color: white;
+}
