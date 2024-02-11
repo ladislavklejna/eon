@@ -11,6 +11,9 @@
   font-weight: 900;
   text-shadow: 1px 1px 1px black;
 }
+.oddo {
+  font-size: 20px;
+}
 .cont {
   display: flex;
 }

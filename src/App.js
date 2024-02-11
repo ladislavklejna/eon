@@ -151,7 +151,7 @@ function App() {
           </div>
         </div>
         <div id="two">
-          <h2 className="text-center">1.únor - 1.duben 2024</h2>
+          <h2 className="text-center oddo">1.únor - 1.duben 2024</h2>
           <div className="topi">
             <h2 className={`text-center ${red ? "red" : "green"} `}>
               {hod}:{zero + min}
