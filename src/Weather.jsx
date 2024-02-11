@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { Table, Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import "./Weather.css";
 import { WiHumidity, WiStrongWind, WiThermometer } from "react-icons/wi";
 
@@ -41,6 +41,7 @@ const Weather = (props) => {
       });
   };
   useEffect(() => {
+    console.log("pocasi");
     loadData();
   }, [props.min]);
 

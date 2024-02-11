@@ -9,10 +9,13 @@ import Weather from "./Weather";
 function App() {
   const [aktual, setAktual] = useState();
   const [zero, setZero] = useState(null);
-  const [red, setRed] = useState(false);
+  const [red, setRed] = useState(null);
   const [message, setMessage] = useState("");
-  const [zajakdlouho, setZajakdlouho] = useState();
+  const [zajakdlouho, setZajakdlouho] = useState(null);
   const [dataPlan, setDataPlan] = useState([]);
+  const [min, setMin] = useState();
+  const [hod, setHod] = useState();
+
   let cas = Date.now();
   let date = new Date(cas);
   let den = date.getDay();
@@ -20,14 +23,23 @@ function App() {
   let minuta = date.getMinutes();
 
   const refresh = () => {
+    cas = Date.now();
+    date = new Date(cas);
+    den = date.getDay();
+    hodina = date.getHours();
+    minuta = date.getMinutes();
     let progress = hodina * 60 + minuta - 360;
     setAktual(progress);
-
+    setMin(minuta);
+    setHod(hodina);
+    let plan;
     // zjisti den a nastavi plan na tyden nebo vikend
     if (den === 6 || den === 0) {
       setDataPlan(dataWeekend);
+      plan = dataWeekend;
     } else {
       setDataPlan(data);
+      plan = data;
     }
     //kdyz je minuta jednociferna prida pred cislo nulu
     if (minuta >= 0 && minuta < 10) {
@@ -38,7 +50,7 @@ function App() {
     // vypocita casy NT a VT
     let summary = 0;
     let pole = [];
-    dataPlan.forEach((eleme) => {
+    plan.forEach((eleme) => {
       if (eleme.value === "ano") {
         summary += 60;
       } else {
@@ -58,7 +70,6 @@ function App() {
         }
       }
     }
-
     // za jak dlouho zacne?
     let x = 0;
     for (let i = 0; i < pole.length; i += 2) {
@@ -91,12 +102,15 @@ function App() {
     } else {
       setRed(false);
     }
+    console.log("interval");
   };
 
   useEffect(() => {
     refresh();
-    let inter = setInterval(refresh, 20000);
-  });
+    let interval = setInterval(refresh, 15000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="App">
       <Container className="cont">
@@ -140,7 +154,7 @@ function App() {
           <h2 className="text-center">1.únor - 1.duben 2024</h2>
           <div className="topi">
             <h2 className={`text-center ${red ? "red" : "green"} `}>
-              {hodina}:{zero + minuta}
+              {hod}:{zero + min}
             </h2>
             {message === "" ? (
               <div>
@@ -167,7 +181,7 @@ function App() {
                 {!red ? "Bude topit po zbytek dne" : "Netopí"}
               </h5>
             )}
-            <Weather min={minuta} hod={hodina} />
+            <Weather min={min} hod={hod} />
           </div>
         </div>
       </Container>
