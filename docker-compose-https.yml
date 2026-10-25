@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  eon-nginx:
+    image: nginx:alpine
+    container_name: eon-nginx
+    restart: unless-stopped
+
+    ports:
+      # HTTP port (pro redirect a health check)
+      - "8080:80"
+      # HTTPS port - ZMĚŇTE 4545 pokud potřebujete jiný port
+      - "4545:443"
+
+    volumes:
+      # Nginx konfigurace s HTTPS
+      # ZMĚŇTE: /srv/dev-disk-by-uuid-XXXXXXX/ na vaší skutečnou cestu
+      - /srv/dev-disk-by-uuid-XXXXXXX/eon/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+      # SSL certifikáty
+      # ZMĚŇTE: /srv/dev-disk-by-uuid-XXXXXXX/ na vaší skutečnou cestu
+      - /srv/dev-disk-by-uuid-XXXXXXX/eon/nginx/ssl:/etc/nginx/ssl:ro
+
+      # Data složka s JSON konfigurací
+      # ZMĚŇTE: /srv/dev-disk-by-uuid-XXXXXXX/ na vaší skutečnou cestu
+      - /srv/dev-disk-by-uuid-XXXXXXX/eon/data:/usr/share/nginx/html/eon:ro
+
+    networks:
+      - eon-network
+
+    healthcheck:
+      # Health check zůstává na HTTP
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    labels:
+      - "com.eon.description=EON Heating Configuration Server with HTTPS"
+      - "com.eon.version=1.1-https"
+      - "com.eon.maintainer=EON"
+
+    # Omezení zdrojů (volitelné)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+        reservations:
+          cpus: '0.1'
+          memory: 32M
+
+networks:
+  eon-network:
+    driver: bridge
+
+# Poznámky:
+# 1. Před nasazením vygenerujte SSL certifikáty: bash generate-ssl-cert.sh
+# 2. Zkopírujte nginx-default-https.conf jako default.conf
+# 3. Změňte cesty k vašim skutečným cestám na NAS
+# 4. Port 4545 je HTTPS, port 8080 je HTTP (redirect na HTTPS)
+# 5. Pro Portainer: Stacks → eon-nginx → Editor → vložte tento soubor
+# 6. Server bude dostupný na: https://VASE-IP:4545/eon/eon-config.json

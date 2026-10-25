@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  eon-nginx:
+    image: nginx:alpine
+    container_name: eon-nginx
+    restart: unless-stopped
+
+    ports:
+      # Externí port 8080 -> interní nginx port 80
+      - "8080:80"
+
+    volumes:
+      # Nginx konfigurace
+      # ZMĚŇTE: /srv/dev-disk-by-uuid-XXXXXXX/ na vaší skutečnou cestu
+      - /srv/dev-disk-by-uuid-XXXXXXX/eon/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+      # Data složka s JSON konfigurací
+      # ZMĚŇTE: /srv/dev-disk-by-uuid-XXXXXXX/ na vaší skutečnou cestu
+      - /srv/dev-disk-by-uuid-XXXXXXX/eon/data:/usr/share/nginx/html/eon:ro
+
+    networks:
+      - eon-network
+
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    labels:
+      - "com.eon.description=EON Heating Configuration Server"
+      - "com.eon.version=1.0"
+      - "com.eon.maintainer=EON"
+
+    # Omezení zdrojů (volitelné)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+        reservations:
+          cpus: '0.1'
+          memory: 32M
+
+networks:
+  eon-network:
+    driver: bridge
+
+# Poznámky:
+# 1. Změňte cesty k vašim skutečným cestám na NAS
+# 2. Port 8080 můžete změnit dle potřeby
+# 3. Pro Portainer: Stacks → Add stack → Web editor → vložte tento soubor

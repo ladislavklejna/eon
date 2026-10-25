@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network Security Config pro EON aplikaci
+  Umožňuje připojení k lokálnímu NAS serveru se self-signed certifikátem
+  Port 4545 pro HTTPS na 10.0.1.51
+-->
+<network-security-config>
+    <!-- Výchozí konfigurace pro všechny domény -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Speciální konfigurace pro váš lokální NAS server (HTTPS + HTTP) -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Váš NAS server na IP 10.0.1.51 -->
+        <domain includeSubdomains="true">10.0.1.51</domain>
+        <trust-anchors>
+            <!-- Důvěřovat systémovým certifikátům -->
+            <certificates src="system" />
+            <!-- Důvěřovat uživatelsky instalovaným certifikátům (včetně self-signed) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Localhost pro vývoj -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

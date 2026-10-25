@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">EON Topení</string>
+    <string name="title_activity_main">EON Topení</string>
+    <string name="package_name">com.eon.heating</string>
+    <string name="custom_url_scheme">com.eon.heating</string>
+</resources>

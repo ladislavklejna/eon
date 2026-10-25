@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network Security Config pro EON aplikaci
+
+  Tento soubor zkopírujte do:
+  android/app/src/main/res/xml/network_security_config.xml
+
+  PO inicializaci Android platformy (npx cap add android)
+-->
+<network-security-config>
+    <!-- Výchozí konfigurace pro všechny domény -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Speciální konfigurace pro váš lokální NAS server -->
+    <domain-config cleartextTrafficPermitted="false">
+        <!-- ZMĚŇTE na vaši IP adresu NAS serveru -->
+        <domain includeSubdomains="false">10.0.1.51</domain>
+        <trust-anchors>
+            <!-- Důvěřovat systémovým certifikátům -->
+            <certificates src="system" />
+            <!-- Důvěřovat uživatelsky instalovaným certifikátům (včetně self-signed) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Localhost pro vývoj -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>

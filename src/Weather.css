@@ -1,26 +1,77 @@
 .one-card {
-  background-color: var(--back);
-  /* box-shadow: 1px 1px 10px 3px inset white; */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
   width: 85px;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 2px;
-  margin: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 12px 8px;
+  margin: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
+
+.one-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
 .one-card p {
-  /* text-align: left; */
   margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  font-size: 13px;
+  transition: color 0.3s ease;
+}
+
+.one-card:hover p {
   color: rgb(255, 255, 255);
 }
 
 .mg {
   align-content: center;
   justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
 }
+
 .mg hr {
-  margin: 3px;
-  color: rgb(255, 255, 255);
+  margin: 8px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  opacity: 0.6;
 }
+
 .white {
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .one-card {
+    width: 100%;
+    max-width: 120px;
+    padding: 14px 10px;
+    margin: 4px;
+  }
+
+  .one-card p {
+    font-size: 14px;
+  }
+
+  .mg {
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 480px) {
+  .one-card {
+    max-width: calc(50% - 12px);
+  }
 }

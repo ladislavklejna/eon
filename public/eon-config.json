@@ -1,0 +1,393 @@
+{
+  "version": "2026-10-25T00:00:00Z",
+  "lastUpdated": "2026-10-25T00:00:00Z",
+  "description": "Konfigurace časů topení EON",
+  "weekday": [
+    {
+      "id": 0,
+      "value": "ano"
+    },
+    {
+      "id": 0.5,
+      "value": "ano"
+    },
+    {
+      "id": 1,
+      "value": "ano"
+    },
+    {
+      "id": 1.5,
+      "value": "ano"
+    },
+    {
+      "id": 2,
+      "value": "ano"
+    },
+    {
+      "id": 2.5,
+      "value": "ano"
+    },
+    {
+      "id": 3,
+      "value": "ano"
+    },
+    {
+      "id": 3.5,
+      "value": "ano"
+    },
+    {
+      "id": 4,
+      "value": "ano"
+    },
+    {
+      "id": 4.5,
+      "value": "ano"
+    },
+    {
+      "id": 5,
+      "value": "ano"
+    },
+    {
+      "id": 5.5,
+      "value": "ano"
+    },
+    {
+      "id": 6,
+      "value": "ano"
+    },
+    {
+      "id": 6.5,
+      "value": "ano"
+    },
+    {
+      "id": 7,
+      "value": "ne"
+    },
+    {
+      "id": 7.5,
+      "value": "ne"
+    },
+    {
+      "id": 8,
+      "value": "ano"
+    },
+    {
+      "id": 8.5,
+      "value": "ano"
+    },
+    {
+      "id": 9,
+      "value": "ano"
+    },
+    {
+      "id": 9.5,
+      "value": "ne"
+    },
+    {
+      "id": 10,
+      "value": "ne"
+    },
+    {
+      "id": 10.5,
+      "value": "ano"
+    },
+    {
+      "id": 11,
+      "value": "ano"
+    },
+    {
+      "id": 11.5,
+      "value": "ano"
+    },
+    {
+      "id": 12,
+      "value": "ano"
+    },
+    {
+      "id": 12.5,
+      "value": "ano"
+    },
+    {
+      "id": 13,
+      "value": "ano"
+    },
+    {
+      "id": 13.5,
+      "value": "ano"
+    },
+    {
+      "id": 14,
+      "value": "ano"
+    },
+    {
+      "id": 14.5,
+      "value": "ano"
+    },
+    {
+      "id": 15,
+      "value": "ano"
+    },
+    {
+      "id": 15.5,
+      "value": "ano"
+    },
+    {
+      "id": 16,
+      "value": "ano"
+    },
+    {
+      "id": 16.5,
+      "value": "ano"
+    },
+    {
+      "id": 17,
+      "value": "ano"
+    },
+    {
+      "id": 17.5,
+      "value": "ano"
+    },
+    {
+      "id": 18,
+      "value": "ano"
+    },
+    {
+      "id": 18.5,
+      "value": "ne"
+    },
+    {
+      "id": 19,
+      "value": "ne"
+    },
+    {
+      "id": 19.5,
+      "value": "ano"
+    },
+    {
+      "id": 20,
+      "value": "ano"
+    },
+    {
+      "id": 20.5,
+      "value": "ano"
+    },
+    {
+      "id": 21,
+      "value": "ne"
+    },
+    {
+      "id": 21.5,
+      "value": "ne"
+    },
+    {
+      "id": 22,
+      "value": "ano"
+    },
+    {
+      "id": 22.5,
+      "value": "ano"
+    },
+    {
+      "id": 23,
+      "value": "ano"
+    },
+    {
+      "id": 23.5,
+      "value": "ano"
+    }
+  ],
+  "weekend": [
+    {
+      "id": 0,
+      "value": "ano"
+    },
+    {
+      "id": 0.5,
+      "value": "ano"
+    },
+    {
+      "id": 1,
+      "value": "ano"
+    },
+    {
+      "id": 1.5,
+      "value": "ano"
+    },
+    {
+      "id": 2,
+      "value": "ano"
+    },
+    {
+      "id": 2.5,
+      "value": "ano"
+    },
+    {
+      "id": 3,
+      "value": "ano"
+    },
+    {
+      "id": 3.5,
+      "value": "ano"
+    },
+    {
+      "id": 4,
+      "value": "ano"
+    },
+    {
+      "id": 4.5,
+      "value": "ano"
+    },
+    {
+      "id": 5,
+      "value": "ano"
+    },
+    {
+      "id": 5.5,
+      "value": "ano"
+    },
+    {
+      "id": 6,
+      "value": "ano"
+    },
+    {
+      "id": 6.5,
+      "value": "ano"
+    },
+    {
+      "id": 7,
+      "value": "ano"
+    },
+    {
+      "id": 7.5,
+      "value": "ano"
+    },
+    {
+      "id": 8,
+      "value": "ne"
+    },
+    {
+      "id": 8.5,
+      "value": "ne"
+    },
+    {
+      "id": 9,
+      "value": "ano"
+    },
+    {
+      "id": 9.5,
+      "value": "ano"
+    },
+    {
+      "id": 10,
+      "value": "ano"
+    },
+    {
+      "id": 10.5,
+      "value": "ne"
+    },
+    {
+      "id": 11,
+      "value": "ne"
+    },
+    {
+      "id": 11.5,
+      "value": "ano"
+    },
+    {
+      "id": 12,
+      "value": "ano"
+    },
+    {
+      "id": 12.5,
+      "value": "ano"
+    },
+    {
+      "id": 13,
+      "value": "ano"
+    },
+    {
+      "id": 13.5,
+      "value": "ano"
+    },
+    {
+      "id": 14,
+      "value": "ano"
+    },
+    {
+      "id": 14.5,
+      "value": "ano"
+    },
+    {
+      "id": 15,
+      "value": "ano"
+    },
+    {
+      "id": 15.5,
+      "value": "ano"
+    },
+    {
+      "id": 16,
+      "value": "ano"
+    },
+    {
+      "id": 16.5,
+      "value": "ano"
+    },
+    {
+      "id": 17,
+      "value": "ano"
+    },
+    {
+      "id": 17.5,
+      "value": "ano"
+    },
+    {
+      "id": 18,
+      "value": "ano"
+    },
+    {
+      "id": 18.5,
+      "value": "ano"
+    },
+    {
+      "id": 19,
+      "value": "ne"
+    },
+    {
+      "id": 19.5,
+      "value": "ne"
+    },
+    {
+      "id": 20,
+      "value": "ano"
+    },
+    {
+      "id": 20.5,
+      "value": "ano"
+    },
+    {
+      "id": 21,
+      "value": "ano"
+    },
+    {
+      "id": 21.5,
+      "value": "ne"
+    },
+    {
+      "id": 22,
+      "value": "ne"
+    },
+    {
+      "id": 22.5,
+      "value": "ano"
+    },
+    {
+      "id": 23,
+      "value": "ano"
+    },
+    {
+      "id": 23.5,
+      "value": "ano"
+    }
+  ]
+}
